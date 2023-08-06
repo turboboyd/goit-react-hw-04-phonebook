@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import css from './ContactForm.module.css';
 
-export function ContactForm() {
+export function ContactForm(props) {
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   // state = {
@@ -21,19 +21,20 @@ export function ContactForm() {
 
   const handeleChangeEmail = e => {
     setName(e.currentTarget.value);
-
   };
-    const handeleChangeNumber = e => {
-      setNumber(e.currentTarget.value);
-    };
+  const handeleChangeNumber = e => {
+    setNumber(e.currentTarget.value);
+  };
 
   const hendleSubmit = e => {
     e.preventDefault();
 
-    // props.createUser({
-    //   name: name,
-    //   number: number,
-    // });
+    console.log(props.createUser);
+
+    props.createUser({
+      name: name,
+      number: number,
+    });
     // resetState();
   };
 
