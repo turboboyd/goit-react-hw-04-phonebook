@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
 import css from './ContactForm.module.css';
+import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 
 export function ContactForm(props) {
-
+  const loginInputId = nanoid();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // state = {
-  //   name: '',
-  //   number: '',
-  // };
-
-  // static propTypes = {
-  //   createUser: PropTypes.func.isRequired,
-  // };
-  // useEffect((e) => {
-  //   console.log(e)
-  //   setName(prev => console.log(prev));
-  //   console.log('Mouting phase: same when componentDidMount runs');
-  // }, []);
 
   const handeleChangeEmail = e => {
     setName(e.currentTarget.value);
@@ -28,20 +17,17 @@ export function ContactForm(props) {
 
   const hendleSubmit = e => {
     e.preventDefault();
-
-    console.log(props.createUser);
-
     props.createUser({
       name: name,
       number: number,
     });
-    // resetState();
+    resetState();
   };
 
   const resetState = () => {
-    // setState({ name: '', number: '' });
+    setName('');
+    setNumber('');
   };
-  const loginInputId = 1;
   return (
     <form className={css.form} onSubmit={hendleSubmit}>
       <label className={css.label} htmlFor={loginInputId}>
@@ -78,3 +64,7 @@ export function ContactForm(props) {
     </form>
   );
 }
+
+ContactForm.propTypes = {
+  createUser: PropTypes.func.isRequired,
+};
